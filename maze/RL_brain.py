@@ -22,24 +22,30 @@ class QLearningTable:
         else:
             # choose random action
             action = np.random.choice(self.actions)
-
+            
         return action
 
     def learn(self, s, a, r, s_):
-        print("q_table:")
-        print(self.q_table)
         self.check_state_exist(s_)
         q_predict = self.q_table.loc[s, a]
         if s_ != 'terminal':
-            q_target = r + self.gamma * self.q_table.loc[s_, :].max()  # next state is not terminal
+            # q_target = r + γ * max{Q(s', a')},
+            """
+            Your code here
+            """
         else:
             q_target = r  # next state is terminal
 
-        self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
+        """
+        Your code here
+        """
 
     def check_state_exist(self, state):
         if state not in self.q_table.index:
-            # append new state to q table
-            pd_series = pd.Series([0]*len(self.actions), index=self.q_table.columns, name=state)
-            pd_series = pd.DataFrame(pd_series).T
-            self.q_table = pd.concat([self.q_table, pd_series])
+        
+        """
+        Your code here
+        """ 
+
+
+               
