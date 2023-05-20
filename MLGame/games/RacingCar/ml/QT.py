@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 class QLearningTable:
-    def __init__(self, actions, learning_rate = 0.2, reward_decay=0.8, e_greedy=0.1):
+    def __init__(self, actions, learning_rate = 0.1, reward_decay=0.8, e_greedy=0.8):
         self.actions = actions
         self.lr = learning_rate
         self.gamma = reward_decay
@@ -14,7 +14,7 @@ class QLearningTable:
     def choose_action(self, observation):
         self.check_state_exist(observation)
 
-        if np.random.uniform() > self.epsilon:
+        if np.random.uniform() < self.epsilon:
             state_action = self.q_table.loc[observation, :]
             action = np.random.choice(state_action[state_action == np.max(state_action)].index)
         else:
@@ -25,12 +25,14 @@ class QLearningTable:
         self.check_state_exist(s)
         self.check_state_exist(s_)
         q_predict = self.q_table.loc[s,a]
-        print("q_table:\n ", self.q_table)
+        
         if s_ != 'Gave_over' or s_ !='Gave_pass':
             q_target = r+ self.gamma * self.q_table.loc[s_, :].max()
         else:
             q_target = r
 
+        print("q_table:")
+        print(self.q_table)
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
 
     def check_state_exist(self,state):

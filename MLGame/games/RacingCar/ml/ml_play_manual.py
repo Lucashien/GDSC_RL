@@ -1,6 +1,5 @@
 import pygame
 
-
 class MLPlay:
     def __init__(self,*args,**kwargs):
         self.other_cars_position = []
