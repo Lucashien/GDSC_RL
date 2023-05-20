@@ -26,6 +26,8 @@ class QLearningTable:
         return action
 
     def learn(self, s, a, r, s_):
+        print("q_table:")
+        print(self.q_table)
         self.check_state_exist(s_)
         q_predict = self.q_table.loc[s, a]
         if s_ != 'terminal':

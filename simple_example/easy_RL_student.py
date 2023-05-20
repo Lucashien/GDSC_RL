@@ -5,7 +5,7 @@ import time
 np.random.seed(5)  # reproducible
 
 
-N_STATES = 10   # the length of the 1 dimensional world
+N_STATES = 6   # the length of the 1 dimensional world
 ACTIONS = ['left', 'right']     # available actions
 EPSILON = 0.9   # greedy police
 ALPHA = 0.1     # learning rate
@@ -21,6 +21,17 @@ def build_q_table(n_states, actions):
     )
     # print(table)    # show table
     return table
+
+# q_table:
+"""
+   left  right
+0   0.0    0.0
+1   0.0    0.0
+2   0.0    0.0
+3   0.0    0.0
+4   0.0    0.0
+5   0.0    0.0
+"""
 
 ## Step 1
 def choose_action(state, q_table):

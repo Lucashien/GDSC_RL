@@ -18,7 +18,7 @@ else:
 UNIT = 40   # pixels
 MAZE_H = 4  # grid height
 MAZE_W = 4  # grid width
-FRESHTIME = 0.01
+FRESHTIME = 0.5
 
 class Maze(tk.Tk, object):
     def __init__(self):

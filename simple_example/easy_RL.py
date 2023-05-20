@@ -13,23 +13,32 @@ import time
 np.random.seed(5)  # reproducible
 
 
-N_STATES = 10   # the length of the 1 dimensional world
+N_STATES = 6                    # the length of the 1 dimensional world
 ACTIONS = ['left', 'right']     # available actions
-EPSILON = 0.9   # greedy police
-ALPHA = 0.1     # learning rate
-GAMMA = 0.9    # discount factor
-MAX_EPISODES = 13   # maximum episodes
-FRESH_TIME = 0.05    # fresh time for one move
+EPSILON = 0.9                   # greedy police
+ALPHA = 0.1                     # learning rate
+GAMMA = 0.9                     # discount factor
+MAX_EPISODES = 13               # maximum episodes
+FRESH_TIME = 0.05               # fresh time for one move
 
 # 初始化QTable
 def build_q_table(n_states, actions):
     table = pd.DataFrame(
         np.zeros((n_states, len(actions))),     # q_table initial values
-        columns=actions,    # actions's name
+        columns=actions,                        # actions's name
     )
-    # print(table)    # show table
     return table
 
+# q_table:
+"""
+   left  right
+0   0.0    0.0
+1   0.0    0.0
+2   0.0    0.0
+3   0.0    0.0
+4   0.0    0.0
+5   0.0    0.0
+"""
 
 def choose_action(state, q_table):
     # This is how to choose an action
@@ -37,7 +46,7 @@ def choose_action(state, q_table):
     if (np.random.uniform() > EPSILON) or ((state_actions == 0).all()):  # act non-greedy or state-action have no value
         action_name = np.random.choice(ACTIONS)
     else:   # act greedy
-        action_name = state_actions.idxmax()    # replace argmax to idxmax as argmax means a different function in newer version of pandas
+        action_name = state_actions.idxmax()                                # replace argmax to idxmax as argmax means a different function in newer version of pandas
     return action_name
 
 
@@ -79,9 +88,8 @@ def rl():
     # main part of RL loop
     ## 創建Q table
     q_table = build_q_table(N_STATES, ACTIONS)
-
-
     for episode in range(MAX_EPISODES):
+        print("\n",q_table)
         #---設定參數---#
         step_counter = 0
         S = 0
